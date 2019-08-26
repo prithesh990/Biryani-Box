@@ -1,7 +1,8 @@
 import 'babel-polyfill';
 import httpStatus from 'http-status';
 import {
-   resSuccess
+   resSuccess,
+   resError
 } from '../helper/http_handler.helper.js';
 
 export default class BaseController {
@@ -15,7 +16,6 @@ export default class BaseController {
    }
 
    async getAll(req, res, next) {
-      console.log("yes", req)
 
       await this.Model.find()
          .then(rows => resSuccess(res, rows))
@@ -24,12 +24,13 @@ export default class BaseController {
 
    async getOne(req, res, next) {
       try {
-         const objData = await this.Model.getOne(req.params.id);
+         const objData = await this.Model.findById(req.params.id);
          if (objData) {
             return resSuccess(res, objData);
+         } else {
+            const error = 'the Customer with the given id not found';
+            return resError(res, error);
          }
-         const err = new APIError('No such object exists!', httpStatus.NOT_FOUND);
-         return next(err);
       } catch (e) {
          return next(e);
       }
@@ -43,13 +44,15 @@ export default class BaseController {
    }
 
    async update(req, res, next) {
-      this.Model.update(req.params.id, req.body)
+      this.Model.findByIdAndUpdate(req.params.id, req.body, {
+            new: true
+         })
          .then(objData => resSuccess(res, objData))
          .catch(e => next(e));
    }
 
    async remove(req, res, next) {
-      this.Model.remove(req.params.id)
+      this.Model.findByIdAndRemove(req.params.id)
          .then(objData => resSuccess(res, objData))
          .catch(e => next(e));
    }
