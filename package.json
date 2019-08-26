@@ -1,0 +1,40 @@
+{
+  "name": "Biryani-Box",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon start.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "babel": {
+    "plugins": [
+      "@babel/plugin-transform-regenerator"
+    ]
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "fawn": "^2.1.5",
+    "http-status": "^1.3.2",
+    "joi": "^14.3.1",
+    "joi-objectid": "^2.0.0",
+    "joi-phone-number": "^3.0.2",
+    "mongoose": "^5.6.10",
+    "nodemon": "^1.19.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-regenerator": "^7.4.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}
