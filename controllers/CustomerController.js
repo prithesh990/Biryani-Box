@@ -11,7 +11,7 @@ export default class CustomerController extends BaseController {
     // constructor() {
     //     super();
     //     // this.Model = customer;
-        
+
     //     //this.load = this.load.bind(this);
     //     this.get = this.get.bind(this);
     //     // this.login = this.login.bind(this);
