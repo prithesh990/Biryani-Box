@@ -46,11 +46,11 @@ export default class CustomerController extends BaseController {
     //       .catch(e => next(e));
     //   }
 
-    /**
-     * Get user
-     * @returns {User}
-     */
-    async get(req, res) {
-        return res.json(req.body);
-    }
+    // /**
+    //  * Get user
+    //  * @returns {User}
+    //  */
+    // async get(req, res) {
+    //     return res.json(req.body);
+    // }
 }
