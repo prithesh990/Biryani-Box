@@ -4,7 +4,7 @@ import BaseController from './BaseController';
 //     resSuccess,
 //     resError
 // } from '../helpers/http_handler.helper';
-import customer from '../models/customer';
+// import customer from '../models/customer';
 
 
 export default class CustomerController extends BaseController {
