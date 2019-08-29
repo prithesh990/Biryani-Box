@@ -4,18 +4,13 @@ import BaseController from './BaseController';
 //     resSuccess,
 //     resError
 // } from '../helpers/http_handler.helper';
-// import customer from '../models/customer';
+import customer from '../models/customer';
+import {
+    resError
+} from '../helper/http_handler.helper';
 
 
 export default class CustomerController extends BaseController {
-    // constructor() {
-    //     super();
-    //     // this.Model = customer;
-
-    //     //this.load = this.load.bind(this);
-    //     this.get = this.get.bind(this);
-    //     // this.login = this.login.bind(this);
-    // }
 
     //   login(req, res, next) {
     //     // Ideally you'll fetch this from the db

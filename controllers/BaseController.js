@@ -28,7 +28,7 @@ export default class BaseController {
          if (objData) {
             return resSuccess(res, objData);
          } else {
-            const error = 'the Customer with the given id not found';
+            const error = `the given id was not found`;
             return resError(res, error);
          }
       } catch (e) {

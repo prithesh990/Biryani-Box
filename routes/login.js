@@ -4,6 +4,9 @@ const router = express.Router();
 import {
     User
 } from '../models/user';
+import {
+    resError
+} from '../helper/http_handler.helper';
 import UserController from '../controllers/UserController';
 
 const UserLoginController = new UserController(User);
@@ -12,7 +15,7 @@ router.post('/', async (req, res) => {
     const {
         error
     } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return resError(res, error.details[0].message);
     UserLoginController.loginUser(req, res);
 });
 
