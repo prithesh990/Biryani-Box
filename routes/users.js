@@ -14,9 +14,9 @@ import {
 
 const AdminControllerClass = new UserController(User);
 
-router.get('/', async (req, res) => await AdminControllerClass.getAll(req, res));
+router.get('/', auth, async (req, res) => await AdminControllerClass.getAll(req, res));
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
     await AdminControllerClass.createUser(req, res);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -46,12 +46,12 @@ router.put('/:id', async (req, res) => {
 
     await AdminControllerClass.update(req, res);
 });
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const user = await User.findById(req.params.id);
 
     if (!user) return resError(res, 'The User with the given ID was not found.');
     await AdminControllerClass.remove(req, res);
 });
-router.get('/:id', async (req, res) => await AdminControllerClass.getOne(req, res));
+router.get('/:id', auth, async (req, res) => await AdminControllerClass.getOne(req, res));
 
 module.exports = router;

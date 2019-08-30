@@ -11,7 +11,7 @@ import UserController from '../controllers/UserController';
 
 const UserLoginController = new UserController(User);
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);

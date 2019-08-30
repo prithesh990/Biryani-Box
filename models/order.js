@@ -19,6 +19,10 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         min: 1
     },
+    addOnQuantity: {
+        type: Number,
+        min: 1
+    },
     delieveryAddress: {
         type: String,
         minlength: 5
@@ -52,6 +56,7 @@ function validateOrder(order) {
     const schema = {
         price: Joi.number().min(10).required(),
         quantity: Joi.number().min(1).required(),
+        addOnQuantity: Joi.number().min(1).required(),
         delieveryAddress: Joi.string().min(5).max(500).required(),
         paymentStatus: Joi.boolean().required(),
         customerId: Joi.objectId().required(),

@@ -2,6 +2,7 @@ import {
     menu,
     validate
 } from '../models/menu.model';
+import auth from '../middleware/auth';
 import express from 'express';
 const router = express.Router();
 import BaseController from '../controllers/BaseController';
@@ -9,8 +10,7 @@ import {
     resError
 } from '../helper/http_handler.helper';
 const MenuControllerClass = new BaseController(menu);
-
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => await MenuControllerClass.getAll(req, res));
 
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -33,7 +33,7 @@ router.put('/:id', async (req, res) => {
     MenuControllerClass.update(req, res);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const menu_id = await menu.findById(req.params.id);
 
     if (!menu_id) return resError(res, 'The Item with the given ID was not found.');
