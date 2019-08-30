@@ -17,7 +17,7 @@ import OrderController from '../controllers/OrderController';
 
 const OrderControllerClass = new OrderController(Order);
 
-router.get('/', async (req, res) => await OrderControllerClass.getAll(req, res));
+router.get('/', auth, async (req, res) => await OrderControllerClass.getAll(req, res));
 
 router.post('/', async (req, res) => {
     const {
@@ -37,7 +37,7 @@ router.put('/:id', async (req, res) => {
 
     await OrderControllerClass.update(req, res);
 });
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const order = await Order.findById(req.params.id);
 
     if (!order) return resError(res, 'The order with the given ID was not found.');

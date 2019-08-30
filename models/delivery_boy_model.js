@@ -11,13 +11,10 @@ const Delivery_user_Schema = new mongoose.Schema({
     },
     phoneNumber: {
         type: Number,
-        // unique: true,
-        //  required: true,
         maxlength: 10
     },
     delivery_boy_address: {
         type: String,
-        //required: true,
         trim: true,
         minlength: 10,
         maxlength: 500

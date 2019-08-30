@@ -28,6 +28,7 @@ export default class OrderController extends CustomerController {
         const Order = new this.Model({
             price: req.body.price,
             quantity: req.body.quantity,
+            addOnQuantity: req.body.addOnQuantity,
             delieveryAddress: req.body.delieveryAddress,
             paymentStatus: req.body.paymentStatus,
             customer: {
@@ -44,8 +45,7 @@ export default class OrderController extends CustomerController {
             addon: {
                 _id: addons._id,
                 name: addons.name,
-                price: addons.price,
-                quantity: addons.quantity
+                price: addons.price
             }
         });
         await Order.save()

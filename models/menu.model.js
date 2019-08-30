@@ -4,18 +4,14 @@ import mongoose from 'mongoose';
 const menuSchema = new mongoose.Schema({
     name: {
         type: String,
-        // required: true,
         minlength: 1,
         maxlength: 255
     },
     price: {
         type: Number
-        // maxlength: 10
-        // required: true,
     },
     description: {
         type: String,
-        // required: true,
         trim: true,
         maxlength: 500
     }

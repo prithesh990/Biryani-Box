@@ -2,6 +2,7 @@ import {
     Delivery_user,
     validate
 } from '../models/delivery_boy_model';
+import auth from '../middleware/auth';
 import express from 'express';
 const router = express.Router();
 import {
@@ -11,9 +12,9 @@ import {
 import BaseController from '../controllers/BaseController';
 const DeliveryBoyClass = new BaseController(Delivery_user);
 
-router.get('/', async (req, res) => await DeliveryBoyClass.getAll(req, res));
+router.get('/', auth, async (req, res) => await DeliveryBoyClass.getAll(req, res));
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -28,7 +29,7 @@ router.post('/', async (req, res) => {
     await DeliveryBoyClass.create(req, res);
 
 });
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -40,7 +41,7 @@ router.put('/:id', async (req, res) => {
     await DeliveryBoyClass.update(req, res);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const delivery_boy = await Delivery_user.findById(req.params.id);
 
     if (!delivery_boy) return resError(res, 'The Delivery Boy with the given ID was not found.');

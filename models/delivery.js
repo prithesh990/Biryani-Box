@@ -9,11 +9,10 @@ import {
 
 const deliverySchema = new mongoose.Schema({
     delivery_status: {
-        type: Boolean,
-        // required: true
+        type: Boolean
     },
     delivery_boy: {
-        type: Delivery_user_Schema,
+        type: Delivery_user_Schema
     },
     order: {
         type: orderSchema

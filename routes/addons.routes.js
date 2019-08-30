@@ -5,12 +5,13 @@ import {
 import express from 'express';
 const router = express.Router();
 import BaseController from '../controllers/BaseController';
+import auth from '../middleware/auth';
 import {
     resError
 } from '../helper/http_handler.helper';
 const AddonControllerClass = new BaseController(Addon);
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -28,15 +29,17 @@ router.get('/:id', async (req, res) => {
     await AddonControllerClass.getOne(req, res);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
     if (error) return resError(res, error.details[0].message);
+    const addons = await Addon.findById(req.params.id);
+    if (!addons) return resError(res, 'The Addon with the given ID was not found.');
     await AddonControllerClass.update(req, res);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const addons = await Addon.findById(req.params.id);
     if (!addons) return resError(res, 'The Addon with the given ID was not found.');
     await AddonControllerClass.remove(req, res);

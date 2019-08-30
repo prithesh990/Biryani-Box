@@ -5,6 +5,7 @@ import 'babel-polyfill';
 import express from 'express';
 const router = express.Router();
 import customerControl from '../controllers/CustomerController';
+import auth from '../middleware/auth';
 import {
     Customer
 } from '../models/customer';
@@ -14,7 +15,7 @@ import {
 
 const CustomerControlClass = new customerControl(Customer);
 
-router.get('/', async (req, res) => await CustomerControlClass.getAll(req, res));
+router.get('/', auth, async (req, res) => await CustomerControlClass.getAll(req, res));
 
 router.post('/', async (req, res) => {
     const {

@@ -14,7 +14,7 @@ console.log(Delivery);
 import DeliveryController from '../controllers/DeliveryController';
 const DeliveryControllerClass = new DeliveryController(Delivery);
 
-router.get('/', async (req, res) => await DeliveryControllerClass.getAll(req, res));
+router.get('/', auth, async (req, res) => await DeliveryControllerClass.getAll(req, res));
 
 router.post('/', async (req, res) => {
     const {
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     DeliveryControllerClass.createDelivery(req, res);
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -37,7 +37,7 @@ router.put('/:id', async (req, res) => {
     await DeliveryControllerClass.update(req, res);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     const delivery_id = await Delivery.findById(req.params.id);
     if (!delivery_id) return resError(res, 'The Delivery with the given ID was not found.');
 
