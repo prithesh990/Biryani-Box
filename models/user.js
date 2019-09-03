@@ -1,7 +1,9 @@
 import Joi from 'joi';
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import config from 'config';
 
-export const User = mongoose.model('User', new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -10,29 +12,29 @@ export const User = mongoose.model('User', new mongoose.Schema({
         maxlength: 255
     },
     phoneNumber: {
-        type: Number,
-        unique: true,
-        required: true,
-        maxlength: 10
+        type: Number
     },
     email: {
-        type: String,
-        unique: true,
-        required: true
+        type: String
     },
     password: {
         type: String,
         minlength: 4,
-        maxlength: 1024,
-        required: true
+        maxlength: 1024
     }
-
-}));
+});
+userSchema.methods.generateAuthToken = function () {
+    const token = jwt.sign({
+        _id: this._id
+    }, config.get('jwtPrivateKey'));
+    return token;
+}
+export const User = mongoose.model('User', userSchema);
 
 function validateUser(user) {
     const schema = {
         name: Joi.string().min(2).max(255).required(),
-        phoneNumber: Joi.string().max(10).required(),
+        phoneNumber: Joi.number().required(),
         email: Joi.string().required().email(),
         password: Joi.string().min(5).max(255).required()
     };
@@ -41,3 +43,4 @@ function validateUser(user) {
 }
 
 exports.validate = validateUser;
+exports.userSchema = userSchema;
