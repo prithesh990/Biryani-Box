@@ -26,7 +26,7 @@
     "joi-phone-number": "^3.0.2",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.6.10",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.19.1"
   },
   "devDependencies": {
